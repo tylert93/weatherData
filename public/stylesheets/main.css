@@ -1,0 +1,35 @@
+table i{
+    font-size:1.5rem;
+}
+
+table p{
+    margin:10px 0;
+}
+
+.fa-sun{
+    color:#ffdc00;
+}
+
+.fa-hand-holding{
+    color:#e0ac69;
+}
+
+.fa-temperature-low{
+    color:#ff851b;
+}
+
+.fa-temperature-high{
+    color:#ff4136;
+}
+
+.fa-long-arrow-alt-down{
+    color:#001f3f;
+}
+
+.fa-tint{
+    color:#0074D9;
+}
+
+.fa-wind{
+    color:#7fdbff;
+}

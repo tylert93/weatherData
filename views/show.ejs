@@ -1,0 +1,44 @@
+<%- include("partials/header") %>
+
+<div class="container d-flex flex-column align-items-center">
+
+    <h1><%= data.name %></h1>
+
+    <table class="mt-3">
+        <tr>
+            <td><i class="mr-3 fas fa-sun"></i></td>
+            <td><p>Temp - <%= data.main.temp %> &deg;C</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-hand-holding"></i></td>
+            <td><p>Feels like - <%= data.main.feels_like %> &deg;C</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-temperature-low"></i></td>
+            <td><p>Min temp - <%= data.main.temp_min %> &deg;C</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-temperature-high"></i></td>
+            <td><p>Max temp - <%= data.main.temp_max %> &deg;C</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-long-arrow-alt-down"></i></td>
+            <td><p>Pressure - <%= data.main.pressure %> hPa</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-tint"></i></td>
+            <td><p>Humidity - <%= data.main.humidity %> %</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 fas fa-wind"></i></td>
+            <td><p>Wind Speed - <%= data.wind.speed %> m/s</p></td>
+        </tr>
+        <tr>
+            <td><i class="mr-3 far fa-sun"></i></td>
+            <td><p>Sunset - <%= sunset %></p></td>
+        </tr>
+    </table>  
+
+</div>
+
+<%- include("partials/footer") %>
