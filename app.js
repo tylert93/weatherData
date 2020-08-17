@@ -51,7 +51,7 @@ app.get("*", function(req, res){
     res.render("error");
 });
 
-// seedDB();
+seedDB();
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Weather data is running ...");
