@@ -1,16 +1,32 @@
+const Destinations = require('./models/destinations.js');
+
 require('dotenv').config();
 
 const express = require("express"),
       app = express(),
-      axios = require("axios");
+      axios = require("axios"),
+      mongoose = require("mongoose"),
+      seedDB = require("./seed.js");
 
 app.set("view engine", "ejs");
 
 app.use(express.static("node_modules/@fortawesome/fontawesome-free"))
 app.use(express.static("public"));
 
+mongoose.connect(process.env.DATABASE_URL, { 
+    useUnifiedTopology: true, 
+    useNewUrlParser: true, 
+    useFindAndModify:false 
+});
+
 app.get("/", function(req, res){
-    res.render("index");
+    Destinations.find({}, (err, foundDestinations) => {
+        if(err){
+            console.log(err, "Destinations could not be found");
+        } else {
+            res.render("index", {destinations:foundDestinations});
+        }
+    })  
 })
 
 app.get("/:id", function(req, res){
@@ -23,7 +39,8 @@ app.get("/:id", function(req, res){
             minutes = `0 ${sunset.getMinutes()}`,
             seconds = `0 ${sunset.getSeconds()}`,
             formattedSunset = `${hours} : ${minutes.substr(-2)} : ${seconds.substr(-2)}`;
-        res.render("show", {data:response["data"], sunset:formattedSunset})
+        
+        res.render("show", {data:response["data"], sunset:formattedSunset});
     })
     .catch(function(error){
         res.render("error");
@@ -33,6 +50,8 @@ app.get("/:id", function(req, res){
 app.get("*", function(req, res){
     res.render("error");
 });
+
+// seedDB();
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Weather data is running ...");

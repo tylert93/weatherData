@@ -4,6 +4,8 @@
     <div id="mapDiv" style="width: 100%; height: 500px"></div>
 </div>
 
+<% const test = destinations %>
+
   <script>
    
     // initialize map
@@ -14,60 +16,16 @@
       maxZoom: 20,
     }).addTo(map);
     // add marker to the map
-    stJust = L.marker([50.1235682, -5.6980406]).addTo(map);
-    stJust.bindPopup("<b>St Just</b><br><a href='/2638767'>see data</a>");
 
-    stAustell = L.marker([50.338001, -4.795000]).addTo(map);
-    stAustell.bindPopup("<b>St Austell</b><br><a href='/2638853'>see data</a>");
+    var destinations = <%- JSON.stringify(destinations) %>
 
-    plymouth = L.marker([50.3755, -4.1427]).addTo(map);
-    plymouth.bindPopup("<b>St Austell</b><br><a href='/2640194'>see data</a>");
-
-    bude = L.marker([50.826600, -4.543700]).addTo(map);
-    bude.bindPopup("<b>Bude</b><br><a href='/2654380'>see data</a>");
-
-    bournemouth = L.marker([50.7192, -1.8808]).addTo(map);
-    bournemouth.bindPopup("<b>Bournemouth</b><br><a href='/2655095'>see data</a>");
-
-    newport = L.marker([51.5842, -2.9977]).addTo(map);
-    newport.bindPopup("<b>Newport</b><br><a href='/2641598'>Newport</a>");
-
-    bristol = L.marker([51.4545, -2.5879]).addTo(map);
-    bristol.bindPopup("<b>Bristol</b><br><a href='/2654675'>see data</a>");
-    
-    cardiff = L.marker([51.4816, -3.1791]).addTo(map);
-    cardiff.bindPopup("<b>Cardiff</b><br><a href='/2653822'>see data</a>");
-    
-    swansea = L.marker([51.6214, -3.9436]).addTo(map);
-    swansea.bindPopup("<b>Swansea</b><br><a href='/2636432'>see data</a>");
-    
-    carmarthen = L.marker([51.8576, -4.3121]).addTo(map);
-    carmarthen.bindPopup("<b>Carmarthen</b><br><a href='/2653755'>see data</a>");
-    
-    london = L.marker([51.5074, -0.1278]).addTo(map);
-    london.bindPopup("<b>London</b><br><a href='/2643743'>see data</a>");
-    
-    southendonsea = L.marker([51.5459, -0.7077]).addTo(map);
-    southendonsea.bindPopup("<b>Southend-on-sea</b><br><a href='/2637433'>see data</a>");
-
-    ipswich = L.marker([52.0567, -1.1482]).addTo(map);
-    ipswich.bindPopup("<b>Ipswich</b><br><a href='/2646057'>see data</a>");
-
-    northampton = L.marker([52.2405, -0.9027]).addTo(map);
-    northampton.bindPopup("<b>Northampton</b><br><a href='/2641430'>see data</a>");
-
-    lowestoft = L.marker([52.4811, -1.7534]).addTo(map);
-    lowestoft.bindPopup("<b>Lowestoft</b><br><a href='/2643490'>see data</a>");
-
-    greatyarmouth = L.marker([52.5982, -1.7280]).addTo(map);
-    greatyarmouth.bindPopup("<b>Great Yarmouth</b><br><a href='/2647984'>see data</a>");
-
-    coventry = L.marker([52.4068, -1.5197]).addTo(map);
-    coventry.bindPopup("<b>Coventry</b><br><a href='/2652221'>see data</a>");
-
-    leicester = L.marker([52.6369, -1.1398]).addTo(map);
-    leicester.bindPopup("<b>Leicester</b><br><a href='/2644668'>see data</a>");    
+    destinations.forEach((item, index) => {
+      return (index = L.marker([item.lat, item.lon]).addTo(map),
+              index.bindPopup(`<b>${item.name}</b><br><a href='/${item.OWMKey}'>see data</a>`)
+      )
+    });
         
   </script>
+
 
 <%- include("partials/footer") %>
