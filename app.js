@@ -5,8 +5,7 @@ require('dotenv').config();
 const express = require("express"),
       app = express(),
       axios = require("axios"),
-      mongoose = require("mongoose"),
-      seedDB = require("./seed.js");
+      mongoose = require("mongoose");
 
 app.set("view engine", "ejs");
 
@@ -19,7 +18,7 @@ mongoose.connect(process.env.DATABASE_URL, {
     useFindAndModify:false 
 });
 
-app.get("/", function(req, res){
+app.get("/", (req, res) => {
     Destinations.find({}, (err, foundDestinations) => {
         if(err){
             console.log(err, "Destinations could not be found");
@@ -29,11 +28,11 @@ app.get("/", function(req, res){
     })  
 })
 
-app.get("/:id", function(req, res){
+app.get("/:id", (req, res) => {
     let id = req.params.id,
         url = "http://api.openweathermap.org/data/2.5/weather?units=metric&appid=" + process.env.OPEN_WEATHER_KEY + "&id=" + id;
     axios.get(url)
-    .then(function(response){
+    .then((response) => {
         let sunset = new Date(response["data"].sys.sunset * 1000),
             hours = sunset.getHours(),
             minutes = `0 ${sunset.getMinutes()}`,
@@ -42,17 +41,15 @@ app.get("/:id", function(req, res){
         
         res.render("show", {data:response["data"], sunset:formattedSunset});
     })
-    .catch(function(error){
+    .catch((error) => {
         res.render("error");
     })       
 });
 
-app.get("*", function(req, res){
+app.get("*", (req, res) => {
     res.render("error");
 });
 
-// seedDB();
-
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Weather data is running ...");
 });
