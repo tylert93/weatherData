@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const destinationSchema = new mongoose.Schema({
     name:String,
@@ -7,4 +7,4 @@ const destinationSchema = new mongoose.Schema({
     OWMKey:Number
 });
 
-module.exports = mongoose.model("Destination", destinationSchema);
+export const Destination = mongoose.model("Destination", destinationSchema);
