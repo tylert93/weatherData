@@ -1,4 +1,4 @@
-const Destinations = require('./models/destinations.js');
+const Destination = require('./models/destination.js');
 
 require('dotenv').config();
 
@@ -8,8 +8,7 @@ const express = require("express"),
       mongoose = require("mongoose");
 
 app.set("view engine", "ejs");
-
-app.use(express.static("node_modules/@fortawesome/fontawesome-free"))
+app.use(express.static("node_modules/@fortawesome/fontawesome-free"));
 app.use(express.static("public"));
 
 mongoose.connect(process.env.DATABASE_URL, { 
@@ -18,8 +17,8 @@ mongoose.connect(process.env.DATABASE_URL, {
     useFindAndModify:false 
 });
 
-app.get("/", function(req, res) {
-    Destinations.find({}, (err, foundDestinations) => {
+app.get("/", (req, res) => {
+    Destination.find({}, (err, foundDestinations) => {
         if(err){
             console.log(err, "Destinations could not be found");
         } else {
@@ -28,7 +27,7 @@ app.get("/", function(req, res) {
     })  
 })
 
-app.get("/:id", function(req, res){
+app.get("/:id", (req, res) => {
     let id = req.params.id,
         url = "http://api.openweathermap.org/data/2.5/weather?units=metric&appid=" + process.env.OPEN_WEATHER_KEY + "&id=" + id;
     axios.get(url)
@@ -41,15 +40,15 @@ app.get("/:id", function(req, res){
         
         res.render("show", {data:response["data"], sunset:formattedSunset});
     })
-    .catch(function(error){
+    .catch((error) => {
         res.render("error");
     })       
 });
 
-app.get("*", function(req, res){
+app.get("*", (req, res) => {
     res.render("error");
 });
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(process.env.PORT, process.env.IP, () => {
     console.log("Weather data is running ...");
 });
