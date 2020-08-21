@@ -1,13 +1,14 @@
-import express from 'express';
-import axios from 'axios';
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import {Destination} from './models/destination.js';
+const Destinations = require('./models/destinations.js');
 
-const app = express();      
+require('dotenv').config();
 
-dotenv.config();
+const express = require("express"),
+      app = express(),
+      axios = require("axios"),
+      mongoose = require("mongoose");
+
 app.set("view engine", "ejs");
+
 app.use(express.static("node_modules/@fortawesome/fontawesome-free"))
 app.use(express.static("public"));
 
@@ -18,7 +19,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 });
 
 app.get("/", (req, res) => {
-    Destination.find({}, (err, foundDestinations) => {
+    Destinations.find({}, (err, foundDestinations) => {
         if(err){
             console.log(err, "Destinations could not be found");
         } else {
