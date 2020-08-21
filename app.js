@@ -18,7 +18,7 @@ mongoose.connect(process.env.DATABASE_URL, {
     useFindAndModify:false 
 });
 
-app.get("/", (req, res) => {
+app.get("/", function (req, res) {
     Destinations.find({}, (err, foundDestinations) => {
         if(err){
             console.log(err, "Destinations could not be found");
