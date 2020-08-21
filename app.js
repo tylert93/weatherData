@@ -1,12 +1,11 @@
-const Destination = require('./models/destination.js');
-
-require('dotenv').config();
-
 const express = require("express"),
       app = express(),
       axios = require("axios"),
-      mongoose = require("mongoose");
+      mongoose = require("mongoose"),
+      dotenv = require('dotenv'),
+      Destination = require('./models/destination.js');
 
+dotenv.config();
 app.set("view engine", "ejs");
 app.use(express.static("node_modules/@fortawesome/fontawesome-free"));
 app.use(express.static("public"));
