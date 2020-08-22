@@ -7,4 +7,4 @@ const destinationSchema = new mongoose.Schema({
     OWMKey:Number
 });
 
-module.exports = mongoose.model("Destination", destinationSchema);
+export const Destination = mongoose.model("Destination", destinationSchema);

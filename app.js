@@ -1,9 +1,10 @@
-const express = require("express"),
-      app = express(),
-      axios = require("axios"),
-      mongoose = require("mongoose"),
-      dotenv = require('dotenv'),
-      Destination = require('./models/destination.js');
+import express from 'express';
+import axios from 'axios';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import {Destination} from './models/destination.js';
+
+const app = express();
 
 dotenv.config();
 app.set("view engine", "ejs");
