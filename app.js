@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
             res.render("index", {destinations:foundDestinations});
         }
     })  
-})
+});
 
 app.get("/:id", (req, res) => {
     let id = req.params.id,
